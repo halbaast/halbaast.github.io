@@ -1,12 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halbast</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><style>text{font-family:'Space Grotesk',sans-serif;font-weight:900;fill:white;}</style><rect width='100' height='100' fill='%23000'/><text x='50' y='65' font-size='60' text-anchor='middle'>H</text></svg>">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap');
+        /* Professional kiss animation */
+.kiss-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,20,147,0.1) 0%, transparent 70%);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.kiss-overlay.active {
+    opacity: 1;
+}
+
+.kiss-emoji {
+    font-size: 12rem;
+    position: relative;
+    transform: scale(0);
+    filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9));
+}
+
+.kiss-emoji.animate {
+    animation: professionalKiss 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes professionalKiss {
+    0% { 
+        transform: scale(0) translateY(100px) rotate(-15deg);
+        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(10px);
+    }
+    15% { 
+        transform: scale(0.3) translateY(50px) rotate(-8deg);
+        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(5px);
+    }
+    30% { 
+        transform: scale(0.8) translateY(20px) rotate(-3deg);
+        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(2px);
+    }
+    50% { 
+        transform: scale(1.1) translateY(-10px) rotate(2deg);
+        filter: drop-shadow(0 0 50px rgba(255, 105, 180, 1)) blur(0px);
+    }
+    70% { 
+        transform: scale(1) translateY(0px) rotate(0deg);
+        filter: drop-shadow(0 0 60px rgba(255, 105, 180, 1)) blur(0px);
+    }
+    85% { 
+        transform: scale(1.05) translateY(-5px) rotate(1deg);
+        filter: drop-shadow(0 0 50px rgba(255, 105, 180, 0.8)) blur(1px);
+    }
+    100% { 
+        transform: scale(0) translateY(-50px) rotate(5deg);
+        filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.3)) blur(8px);
+    }
+}         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap');
         
         * {
             margin: 0;
@@ -15,16 +77,64 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #0a0a0a;
+            font-family: 'Space Grotesk', sans-serif !important;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.04) 0%, transparent 50%),
+                #0a0a0a;
             color: #fff;
             overflow-x: hidden;
             cursor: none;
             line-height: 1.6;
+            transition: all 2s ease;
+            position: relative;
         }
 
-        body[dir="rtl"] {
-            font-family: 'Noto Kufi Arabic', 'Space Grotesk', sans-serif;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Space Grotesk', sans-serif;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Force Space Grotesk for all text */
+        * {
+            font-family: 'Space Grotesk', sans-serif !important;
+        }
+
+        /* Override for Kurdish text only */
+        body[dir="rtl"] * {
+            font-family: 'Noto Kufi Arabic', 'Space Grotesk', sans-serif !important;
+        }
+
+        /* Force English button to use Space Grotesk */
+        .lang-btn[data-lang="en"] {
+            font-family: 'Space Grotesk', sans-serif !important;
+        }
+
+        /* Easter Egg Styles */
+        body.easter-egg-active {
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c) !important;
+        }
+
+        body.easter-egg-active nav {
+            background: rgba(255, 20, 147, 0.8) !important;
+        }
+
+        body.easter-egg-active .profile-overlay {
+            background: linear-gradient(45deg, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.3)) !important;
+        }
+
+        body.easter-egg-active .rotating-element {
+            background: linear-gradient(45deg, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.3)) !important;
         }
 
         /* Custom Cursor */
@@ -61,6 +171,7 @@
             z-index: 1000;
             backdrop-filter: blur(20px);
             background: rgba(10, 10, 10, 0.8);
+            transition: all 0.5s ease;
         }
 
         .nav-container {
@@ -76,6 +187,16 @@
             font-size: 20px;
             letter-spacing: 1px;
             text-transform: uppercase;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 10px;
         }
 
         .nav-menu {
@@ -113,6 +234,23 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .lang-btn[data-lang="ku"] {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-size: 14px;
+            text-transform: none;
+        }
+
+        /* Ensure English button uses Space Grotesk even when Kurdish is active */
+        .lang-btn[data-lang="en"] {
+            font-family: 'Space Grotesk', sans-serif !important;
+        }
+
+        /* When Kurdish is active, make sure Kurdish text in English button uses Noto Kufi */
+        body[dir="rtl"] .lang-btn[data-lang="en"] {
+            font-family: 'Noto Kufi Arabic', sans-serif !important;
         }
 
         .lang-btn.active,
@@ -165,6 +303,17 @@
             margin-bottom: 30px;
             opacity: 0;
             animation: fadeInUp 1.5s ease forwards 0.5s;
+            background: linear-gradient(135deg, #ffffff 0%, #9ca3af 20%, #6b7280 40%, #4b5563 60%, #374151 80%, #000000 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1.5s ease forwards 0.5s, gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .hero-subtitle {
@@ -286,16 +435,6 @@
             z-index: 2;
         }
 
-
-.lang-btn {
-    font-family: 'Space Grotesk', sans-serif;
-}
-
-.lang-btn[data-lang="ku"] {
-    font-family: 'Noto Kufi Arabic', sans-serif;
-    font-size: 14px;
-}
-
         .profile-image:hover {
             filter: grayscale(0%) contrast(1);
             transform: scale(1.02);
@@ -314,7 +453,7 @@
 
         .about-text h2 {
             font-size: 4rem;
-            font-weight: 300;
+            font-weight: 700;
             margin-bottom: 40px;
             letter-spacing: -1px;
         }
@@ -377,131 +516,6 @@
             transform: translateY(-50%);
         }
 
-        .about-visual {
-            position: relative;
-            height: 600px;
-        }
-
-        .floating-card {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            transition: transform 0.6s ease;
-            cursor: pointer;
-        }
-
-        .floating-card:hover {
-            transform: translateY(-10px) rotateY(5deg);
-        }
-
-        .card-1 {
-            width: 200px;
-            height: 120px;
-            top: 50px;
-            right: 100px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .card-2 {
-            width: 180px;
-            height: 100px;
-            bottom: 150px;
-            left: 50px;
-            animation: float 6s ease-in-out infinite 2s;
-        }
-
-        .card-3 {
-            width: 160px;
-            height: 140px;
-            top: 200px;
-            left: 200px;
-            animation: float 6s ease-in-out infinite 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotateX(0deg); }
-            50% { transform: translateY(-20px) rotateX(5deg); }
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            padding: 120px 60px;
-            min-height: 100vh;
-        }
-
-        .portfolio-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .portfolio h2 {
-            font-size: 4rem;
-            font-weight: 300;
-            text-align: center;
-            margin-bottom: 100px;
-            letter-spacing: -1px;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .portfolio-item {
-            aspect-ratio: 1;
-            background: #0a0a0a;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.6s ease;
-        }
-
-        .portfolio-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: scale(1.02);
-            z-index: 10;
-        }
-
-        .portfolio-content {
-            position: absolute;
-            inset: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .portfolio-item:hover .portfolio-content {
-            opacity: 1;
-        }
-
-        .portfolio-title {
-            font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-
-        .portfolio-category {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-
-        .portfolio-year {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
-            align-self: flex-end;
-            font-weight: 500;
-        }
-
         /* Contact Section */
         .contact {
             min-height: 100vh;
@@ -522,7 +536,7 @@
 
         .contact-info h2 {
             font-size: 4rem;
-            font-weight: 300;
+            font-weight: 700;
             margin-bottom: 40px;
             letter-spacing: -1px;
         }
@@ -570,6 +584,7 @@
             border-radius: 12px;
             animation: rotate3D 20s linear infinite;
             transform-style: preserve-3d;
+            transition: all 0.5s ease;
         }
 
         @keyframes rotate3D {
@@ -588,6 +603,20 @@
             }
         }
 
+        /* Mobile Navigation */
+        .nav-menu.mobile-open {
+            position: fixed;
+            top: 100px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            padding: 30px;
+            gap: 30px;
+            text-align: center;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .about-container,
@@ -596,42 +625,188 @@
                 gap: 60px;
             }
             
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .hero h1 {
                 font-size: 4rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .profile-image {
+                width: 250px;
+                height: 320px;
             }
         }
 
         @media (max-width: 768px) {
+            /* Navigation */
             nav {
                 padding: 20px 30px;
             }
+
+            .nav-container {
+                position: relative;
+            }
             
             .nav-menu {
-                gap: 30px;
+                display: none;
+            }
+
+            .nav-menu.mobile-open {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .language-switcher {
+                margin-left: 0;
+                margin-top: 20px;
             }
             
+            /* Hero Section */
+            .hero {
+                padding: 0 20px;
+                text-align: center;
+            }
+
             .hero h1 {
                 font-size: 3rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+                margin-bottom: 40px;
+                padding: 0 10px;
             }
             
+            /* Sections */
             .about,
-            .portfolio,
             .contact {
-                padding: 60px 30px;
+                padding: 60px 20px;
             }
             
             .about-text h2,
-            .portfolio h2,
             .contact-info h2 {
                 font-size: 2.5rem;
+                margin-bottom: 30px;
             }
-            
-            .portfolio-grid {
-                grid-template-columns: 1fr;
+
+            .about-description,
+            .contact-description {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            /* About Section */
+            .about-container {
+                gap: 40px;
+            }
+
+            .profile-section {
+                height: 400px;
+                order: -1;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 280px;
+            }
+
+            .skills-grid {
+                margin-bottom: 20px;
+            }
+
+            .skill-category h4 {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+
+            .skill-item {
+                font-size: 13px;
+                padding-left: 15px;
+            }
+
+            .skill-item::before {
+                width: 6px;
+            }
+
+            /* Contact */
+            .contact-container {
+                gap: 40px;
+            }
+
+            .contact-visual {
+                height: 250px;
+                order: -1;
+            }
+
+            .contact-links {
+                gap: 20px;
+            }
+
+            .contact-link {
+                font-size: 15px;
+                padding: 12px 0;
+            }
+
+            /* 3D Canvas - Reduce performance on mobile */
+            .canvas-container {
+                opacity: 0.3;
+            }
+
+            /* Cursor - Disable on mobile */
+            .cursor,
+            .cursor-trail {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-text h2,
+            .contact-info h2 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .profile-image {
+                width: 180px;
+                height: 240px;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+
+        /* Touch-friendly hover states */
+        @media (hover: none) and (pointer: coarse) {
+            .contact-link:hover {
+                padding-left: 0;
             }
         }
     </style>
@@ -643,14 +818,14 @@
     <nav>
         <div class="nav-container">
             <div class="logo" data-en="Halbast" data-ku="هەڵبەست">Halbast</div>
-            <ul class="nav-menu">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" data-en="Home" data-ku="سەرەتا">Home</a></li>
                 <li><a href="#about" data-en="About" data-ku="دەربارە">About</a></li>
-                <li><a href="#work" data-en="Work" data-ku="کارەکانم">Work</a></li>
                 <li><a href="#contact" data-en="Contact" data-ku="پەیوەندی">Contact</a></li>
                 <div class="language-switcher">
                     <button class="lang-btn active" data-lang="en" data-en="ENGLISH" data-ku="ئینگلیزی">ENGLISH</button>
-<button class="lang-btn" data-lang="ku" data-en="کوردی" data-ku="کوردی">کوردی</button>
+                    <button class="lang-btn" data-lang="ku" data-en="کوردی" data-ku="کوردی">کوردی</button>
                 </div>
             </ul>
         </div>
@@ -683,90 +858,28 @@
                         <h4 data-en="Design" data-ku="دیزاین">Design</h4>
                         <div class="skills-list">
                             <div class="skill-item" data-en="Adobe Photoshop" data-ku="فۆتۆشۆپ">Adobe Photoshop</div>
-<div class="skill-item" data-en="Adobe Illustrator" data-ku="ئیلوسترەیتەر">Adobe Illustrator</div>
-<div class="skill-item" data-en="Brand Identity" data-ku="ناسنامەی براند">Brand Identity</div>
-<div class="skill-item" data-en="Poster Design" data-ku="دیزاینی پۆستەر">Poster Design</div>
-<div class="skill-item" data-en="Print Design" data-ku="دیزاینی چاپکراو">Print Design</div>
-<div class="skill-item" data-en="Social Media Design" data-ku="دیزاینی سۆشیاڵ میدیا">Social Media Design</div>
+                            <div class="skill-item" data-en="Adobe Illustrator" data-ku="ئیلوسترەیتەر">Adobe Illustrator</div>
+                            <div class="skill-item" data-en="Brand Identity" data-ku="ناسنامەی براند">Brand Identity</div>
+                            <div class="skill-item" data-en="Poster Design" data-ku="دیزاینی پۆستەر">Poster Design</div>
+                            <div class="skill-item" data-en="Print Design" data-ku="دیزاینی چاپکراو">Print Design</div>
+                            <div class="skill-item" data-en="Social Media Design" data-ku="دیزاینی سۆشیاڵ میدیا">Social Media Design</div>
                         </div>
                     </div>
                     <div class="skill-category">
                         <h4 data-en="Technical" data-ku="تەکنیکی">Technical</h4>
                         <div class="skills-list">
                             <div class="skill-item" data-en="HTML/CSS" data-ku="HTML/CSS">HTML/CSS</div>
-<div class="skill-item" data-en="Flutter" data-ku="فڵەتەر">Flutter</div>
-<div class="skill-item" data-en="Firebase" data-ku="فایەربەیس">Firebase</div>
-<div class="skill-item" data-en="C#/C++" data-ku="C#/C++">C#/C++</div>
-<div class="skill-item" data-en="Java" data-ku="جاڤا">Java</div>
+                            <div class="skill-item" data-en="Flutter" data-ku="فڵەتەر">Flutter</div>
+                            <div class="skill-item" data-en="Firebase" data-ku="فایەربەیس">Firebase</div>
+                            <div class="skill-item" data-en="C#/C++" data-ku="C#/C++">C#/C++</div>
+                            <div class="skill-item" data-en="Java" data-ku="جاڤا">Java</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="profile-section">
                 <div class="profile-overlay"></div>
-               <img src="images/profile.jpg" alt="Halbast" class="profile-image">
-                        </div>
-        </div>
-    </section>
-
-    <section class="portfolio" id="work">
-        <div class="portfolio-container">
-            <h2 data-en="Selected Work" data-ku="کارە هەڵبژێردراوەکان">Selected Work</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <div>
-                            <div class="portfolio-title" data-en="Mobile App Design" data-ku="دیزاینی ئەپی مۆبایل">Mobile App Design</div>
-                            <div class="portfolio-category" data-en="UI/UX Design" data-ku="دیزاینی UI/UX">UI/UX Design</div>
-                        </div>
-                        <div class="portfolio-year">2024</div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <div>
-                            <div class="portfolio-title" data-en="Brand Identity" data-ku="ناسنامەی براند">Brand Identity</div>
-                            <div class="portfolio-category" data-en="Visual Identity" data-ku="ناسنامەی بینراو">Visual Identity</div>
-                        </div>
-                        <div class="portfolio-year">2024</div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <div>
-                            <div class="portfolio-title" data-en="Social Media Campaign" data-ku="کامپەینی سۆشیاڵ میدیا">Social Media Campaign</div>
-                            <div class="portfolio-category" data-en="Social Design" data-ku="دیزاینی سۆشیاڵ میدیا">Social Design</div>
-                        </div>
-                        <div class="portfolio-year">2024</div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <div>
-                            <div class="portfolio-title" data-en="Website Interface" data-ku="ڕووکاری وێبسایت">Website Interface</div>
-                            <div class="portfolio-category" data-en="Web Design" data-ku="دیزاینی وێب">Web Design</div>
-                        </div>
-                        <div class="portfolio-year">2024</div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <div>
-                            <div class="portfolio-title" data-en="Print Materials" data-ku="کاری چاپکراو">Print Materials</div>
-                            <div class="portfolio-category" data-en="Print Design" data-ku="دیزاینی چاپکراو">Print Design</div>
-                        </div>
-                        <div class="portfolio-year">2024</div>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <div>
-                            <div class="portfolio-title" data-en="Poster Series" data-ku="زنجیرەی پۆستەر">Poster Series</div>
-                            <div class="portfolio-category" data-en="Poster Design" data-ku="دیزاینی پۆستەر">Poster Design</div>
-                        </div>
-                        <div class="portfolio-year">2024</div>
-                    </div>
-                </div>
+                <img src="images/profile.jpg" alt="Halbast" class="profile-image">
             </div>
         </div>
     </section>
@@ -781,8 +894,8 @@
                 <div class="contact-links">
                     <a href="mailto:halbastabdullah7@gmail.com" class="contact-link" data-en="halbastabdullah7@gmail.com" data-ku="ئیمەیڵ">halbastabdullah7@gmail.com</a>
                     <a href="https://www.linkedin.com/in/halbast/" class="contact-link" target="_blank" data-en="LinkedIn" data-ku="لینکدین">LinkedIn</a>
-<a href="https://instagram.com/halbaast_" class="contact-link" target="_blank" data-en="Instagram" data-ku="ئینستاگرام">Instagram</a>
-<a href="https://www.behance.net/halbastabdullah" class="contact-link" target="_blank" data-en="Behance" data-ku="بیهانس">Behance</a>
+                    <a href="https://instagram.com/halbaast_" class="contact-link" target="_blank" data-en="Instagram" data-ku="ئینستاگرام">Instagram</a>
+                    <a href="https://www.behance.net/halbastabdullah" class="contact-link" target="_blank" data-en="Behance" data-ku="بیهانس">Behance</a>
                 </div>
             </div>
             <div class="contact-visual">
@@ -819,7 +932,7 @@
         animateTrail();
 
         // Hover effects
-        document.querySelectorAll('a, .portfolio-item, .floating-card').forEach(el => {
+        document.querySelectorAll('a, .floating-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.transform = 'scale(3)';
                 cursorTrail.style.transform = 'scale(1.5)';
@@ -846,48 +959,197 @@
         });
 
         // 3D Scene with Three.js
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas: document.getElementById('canvas3d'),
-            alpha: true,
-            antialias: true
-        });
+        let scene, camera, renderer, shapes = [];
+        let easterEggActive = false;
+        let heartShapes = [];
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 0);
-
-        // Create floating geometric shapes
-        const shapes = [];
-        const geometries = [
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.OctahedronGeometry(1),
-            new THREE.TetrahedronGeometry(1)
-        ];
-
-        for (let i = 0; i < 15; i++) {
-            const geometry = geometries[Math.floor(Math.random() * geometries.length)];
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0xffffff,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.1
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('canvas3d'),
+                alpha: true,
+                antialias: true
             });
-            
-            const mesh = new THREE.Mesh(geometry, material);
-            
-            mesh.position.x = (Math.random() - 0.5) * 20;
-            mesh.position.y = (Math.random() - 0.5) * 20;
-            mesh.position.z = (Math.random() - 0.5) * 20;
-            
-            mesh.rotation.x = Math.random() * Math.PI;
-            mesh.rotation.y = Math.random() * Math.PI;
-            
-            scene.add(mesh);
-            shapes.push(mesh);
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+
+            // Create initial shapes
+            createOriginalShapes();
+            camera.position.z = 10;
         }
 
-        camera.position.z = 10;
+        function createOriginalShapes() {
+            // Clear existing shapes
+            shapes.forEach(shape => scene.remove(shape));
+            shapes.length = 0;
+
+            const geometries = [
+                new THREE.BoxGeometry(1, 1, 1),
+                new THREE.OctahedronGeometry(1),
+                new THREE.TetrahedronGeometry(1)
+            ];
+
+            for (let i = 0; i < 15; i++) {
+                const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: 0xffffff,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.1
+                });
+                
+                const mesh = new THREE.Mesh(geometry, material);
+                
+                mesh.position.x = (Math.random() - 0.5) * 20;
+                mesh.position.y = (Math.random() - 0.5) * 20;
+                mesh.position.z = (Math.random() - 0.5) * 20;
+                
+                mesh.rotation.x = Math.random() * Math.PI;
+                mesh.rotation.y = Math.random() * Math.PI;
+                
+                scene.add(mesh);
+                shapes.push(mesh);
+            }
+        }
+
+        function createHeartShape() {
+            const heartShape = new THREE.Shape();
+            const x = 0, y = 0;
+            heartShape.moveTo(x + 5, y + 5);
+            heartShape.bezierCurveTo(x + 5, y + 5, x + 4, y, x, y);
+            heartShape.bezierCurveTo(x - 6, y, x - 6, y + 3.5, x - 6, y + 3.5);
+            heartShape.bezierCurveTo(x - 6, y + 5.5, x - 4, y + 7.5, x, y + 10);
+            heartShape.bezierCurveTo(x + 4, y + 7.5, x + 6, y + 5.5, x + 6, y + 3.5);
+            heartShape.bezierCurveTo(x + 6, y + 3.5, x + 6, y, x, y);
+            heartShape.bezierCurveTo(x + 4, y, x + 5, y + 5, x + 5, y + 5);
+            
+            const geometry = new THREE.ExtrudeGeometry(heartShape, {
+                depth: 1,
+                bevelEnabled: true,
+                bevelSegments: 2,
+                steps: 2,
+                bevelSize: 0.1,
+                bevelThickness: 0.1
+            });
+            
+            return geometry;
+        }
+
+        function fadeOutAudio() {
+            if (window.easterEggAudio) {
+                const audio = window.easterEggAudio;
+                const fadeInterval = setInterval(() => {
+                    if (audio.volume > 0.05) {
+                        audio.volume -= 0.05;
+                    } else {
+                        audio.volume = 0;
+                        audio.pause();
+                        clearInterval(fadeInterval);
+                        window.easterEggAudio = null;
+                    }
+                }, 100);
+            }
+        }
+
+        function activateEasterEgg() {
+            if (easterEggActive) return;
+            
+            easterEggActive = true;
+            document.body.classList.add('easter-egg-active');
+            
+            // Play your local careless-whisper.mp3 file
+            const audio = new Audio('careless-whisper.mp3');
+            audio.volume = 0.7;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+            
+            // Store audio reference for fade out
+            window.easterEggAudio = audio;
+            
+            // Clear existing shapes
+            shapes.forEach(shape => scene.remove(shape));
+            shapes.length = 0;
+            heartShapes.length = 0;
+            
+            // Create heart shapes
+            const heartGeometry = createHeartShape();
+            
+            for (let i = 0; i < 20; i++) {
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: new THREE.Color().setHSL(Math.random() * 0.1 + 0.9, 0.8, 0.6),
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const heart = new THREE.Mesh(heartGeometry, material);
+                
+                heart.position.x = (Math.random() - 0.5) * 25;
+                heart.position.y = (Math.random() - 0.5) * 25;
+                heart.position.z = (Math.random() - 0.5) * 25;
+                
+                heart.rotation.x = Math.random() * Math.PI;
+                heart.rotation.y = Math.random() * Math.PI;
+                heart.rotation.z = Math.random() * Math.PI;
+                
+                heart.scale.setScalar(0.3 + Math.random() * 0.4);
+                
+                scene.add(heart);
+                heartShapes.push(heart);
+            }
+            
+            // Start fade out at 8 seconds
+            setTimeout(() => {
+                fadeOutAudio();
+            }, 8000);
+            
+            // Auto-deactivate after 10 seconds
+            setTimeout(() => {
+                deactivateEasterEgg();
+            }, 10000);
+        }
+
+        function deactivateEasterEgg() {
+            easterEggActive = false;
+            document.body.classList.remove('easter-egg-active');
+            
+            // Stop audio if still playing
+            if (window.easterEggAudio) {
+                window.easterEggAudio.pause();
+                window.easterEggAudio = null;
+            }
+            
+            // Clear hearts
+            heartShapes.forEach(heart => scene.remove(heart));
+            heartShapes.length = 0;
+            
+            // Restore original shapes
+            createOriginalShapes();
+        }
+
+        // Easter Egg functionality
+        let easterEggSequence = '';
+        const targetSequence = 'xalan';
+
+        // Listen for keystrokes
+        document.addEventListener('keydown', (event) => {
+            let key = event.key.toLowerCase();
+            
+            easterEggSequence += key;
+            
+            // Keep only the last 5 characters (length of target sequence)
+            if (easterEggSequence.length > targetSequence.length) {
+                easterEggSequence = easterEggSequence.slice(-targetSequence.length);
+            }
+            
+            console.log('Current sequence:', easterEggSequence); // Debug line - remove in production
+            
+            // Check if sequence matches
+            if (easterEggSequence === targetSequence) {
+                activateEasterEgg();
+                easterEggSequence = ''; // Reset sequence
+            }
+        });
 
         // Mouse interaction
         let targetX = 0;
@@ -907,47 +1169,70 @@
             camera.position.y += (targetY * 2 - camera.position.y) * 0.02;
             camera.lookAt(0, 0, 0);
 
-            // Rotate shapes
-            shapes.forEach((shape, index) => {
-                shape.rotation.x += 0.002 + index * 0.0001;
-                shape.rotation.y += 0.003 + index * 0.0001;
-                
-                // Gentle floating motion
-                shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
-            });
+            // Animate shapes (regular or hearts)
+            if (easterEggActive && heartShapes.length > 0) {
+                // Animate hearts with smooth radiating effect
+                heartShapes.forEach((heart, index) => {
+                    heart.rotation.x += 0.01 + index * 0.0005;
+                    heart.rotation.y += 0.015 + index * 0.0005;
+                    heart.rotation.z += 0.008 + index * 0.0003;
+                    
+                    // Smooth pulsing effect - no random values
+                    const pulseFactor = 1 + Math.sin(Date.now() * 0.003 + index) * 0.2;
+                    const baseScale = 0.4 + (index % 3) * 0.1; // Consistent base scale
+                    heart.scale.setScalar(baseScale * pulseFactor);
+                    
+                    // Floating motion with radiating pattern
+                    const radiatingDistance = Math.sin(Date.now() * 0.002 + index) * 3;
+                    heart.position.y += Math.sin(Date.now() * 0.001 + index) * 0.005;
+                    
+                    // Create radiating effect from center
+                    const angle = (index / heartShapes.length) * Math.PI * 2;
+                    const radius = 8 + radiatingDistance;
+                    heart.position.x = Math.cos(angle + Date.now() * 0.0005) * radius;
+                    heart.position.z = Math.sin(angle + Date.now() * 0.0005) * radius;
+                });
+            } else {
+                // Regular shape animation
+                shapes.forEach((shape, index) => {
+                    shape.rotation.x += 0.002 + index * 0.0001;
+                    shape.rotation.y += 0.003 + index * 0.0001;
+                    
+                    // Gentle floating motion
+                    shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
+                });
+            }
 
             renderer.render(scene, camera);
         }
-        animate();
+
+        // Initialize Three.js when page loads
+        window.addEventListener('load', () => {
+            initThreeJS();
+            animate();
+        });
 
         // Handle resize
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
         });
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('mobile-open');
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navMenu = document.getElementById('navMenu');
+                navMenu.classList.remove('mobile-open');
             });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.about-text, .portfolio-item, .contact-info').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(50px)';
-            el.style.transition = 'all 1s ease';
-            observer.observe(el);
         });
 
         // Language switching functionality
@@ -985,7 +1270,30 @@
             });
         });
 
-        // Remove old floating card animations since we're using the profile image now
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.about-text, .contact-info').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 1s ease';
+            observer.observe(el);
+        });
+
+        // Parallax effect for profile image
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const profileImage = document.querySelector('.profile-image');
