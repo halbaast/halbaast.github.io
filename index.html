@@ -1,74 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halbast</title>
+    <title>Halbast - Graphic Designer</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><style>text{font-family:'Space Grotesk',sans-serif;font-weight:900;fill:white;}</style><rect width='100' height='100' fill='%23000'/><text x='50' y='65' font-size='60' text-anchor='middle'>H</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Professional kiss animation */
-.kiss-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,20,147,0.1) 0%, transparent 70%);
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-.kiss-overlay.active {
-    opacity: 1;
-}
-
-.kiss-emoji {
-    font-size: 12rem;
-    position: relative;
-    transform: scale(0);
-    filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9));
-}
-
-.kiss-emoji.animate {
-    animation: professionalKiss 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-@keyframes professionalKiss {
-    0% { 
-        transform: scale(0) translateY(100px) rotate(-15deg);
-        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(10px);
-    }
-    15% { 
-        transform: scale(0.3) translateY(50px) rotate(-8deg);
-        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(5px);
-    }
-    30% { 
-        transform: scale(0.8) translateY(20px) rotate(-3deg);
-        filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(2px);
-    }
-    50% { 
-        transform: scale(1.1) translateY(-10px) rotate(2deg);
-        filter: drop-shadow(0 0 50px rgba(255, 105, 180, 1)) blur(0px);
-    }
-    70% { 
-        transform: scale(1) translateY(0px) rotate(0deg);
-        filter: drop-shadow(0 0 60px rgba(255, 105, 180, 1)) blur(0px);
-    }
-    85% { 
-        transform: scale(1.05) translateY(-5px) rotate(1deg);
-        filter: drop-shadow(0 0 50px rgba(255, 105, 180, 0.8)) blur(1px);
-    }
-    100% { 
-        transform: scale(0) translateY(-50px) rotate(5deg);
-        filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.3)) blur(8px);
-    }
-}         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap');
+        :root {
+            --bg-primary: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --accent: rgba(255, 255, 255, 0.1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
         
         * {
             margin: 0;
@@ -77,88 +26,166 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif !important;
+            font-family: 'Space Grotesk', sans-serif;
             background: 
                 radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.04) 0%, transparent 50%),
-                #0a0a0a;
-            color: #fff;
+                var(--bg-primary);
+            color: var(--text-primary);
             overflow-x: hidden;
-            cursor: none;
             line-height: 1.6;
-            transition: all 2s ease;
             position: relative;
+        }
+
+        /* Dynamic grid background - graphic designer touch */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        body.show-grid::after {
+            opacity: 1;
         }
 
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Space Grotesk', sans-serif;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Force Space Grotesk for all text */
-        * {
-            font-family: 'Space Grotesk', sans-serif !important;
+        /* Variable font weight on hover */
+        .variable-weight {
+            font-variation-settings: 'wght' 400;
+            transition: font-variation-settings 0.3s ease;
         }
 
-        /* Override for Kurdish text only */
-        body[dir="rtl"] * {
-            font-family: 'Noto Kufi Arabic', 'Space Grotesk', sans-serif !important;
+        .variable-weight:hover {
+            font-variation-settings: 'wght' 700;
         }
 
-        /* Force English button to use Space Grotesk */
-        .lang-btn[data-lang="en"] {
-            font-family: 'Space Grotesk', sans-serif !important;
+        /* Graphic design accent elements */
+        .design-accent {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+            mix-blend-mode: soft-light;
         }
 
-        /* Easter Egg Styles */
-        body.easter-egg-active {
-            background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c) !important;
+        .design-accent-1 {
+            top: 10%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
         }
 
-        body.easter-egg-active nav {
-            background: rgba(255, 20, 147, 0.8) !important;
+        .design-accent-2 {
+            bottom: 15%;
+            left: 8%;
+            width: 150px;
+            height: 150px;
+            border: 2px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            transform: rotate(45deg);
+            animation: rotate 30s linear infinite;
         }
 
-        body.easter-egg-active .profile-overlay {
-            background: linear-gradient(45deg, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.3)) !important;
+        .design-accent-3 {
+            top: 50%;
+            left: 3%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: pulse 15s ease-in-out infinite;
         }
 
-        body.easter-egg-active .rotating-element {
-            background: linear-gradient(45deg, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.3)) !important;
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(5deg); }
+            50% { transform: translate(0, -40px) rotate(0deg); }
+            75% { transform: translate(-20px, -20px) rotate(-5deg); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(45deg); }
+            to { transform: rotate(405deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        /* RTL Support for Kurdish */
+        body[dir="rtl"] {
+            font-family: 'IBM Plex Sans Arabic', 'Space Grotesk', sans-serif;
+        }
+
+        body[dir="rtl"] .lang-btn[data-lang="en"] {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Force Kurdish font for all Kurdish text in data attributes */
+        body[dir="rtl"] [data-ku],
+        body[dir="rtl"] .logo,
+        body[dir="rtl"] .nav-menu a,
+        body[dir="rtl"] .hero h1,
+        body[dir="rtl"] .hero-subtitle,
+        body[dir="rtl"] .hero-description,
+        body[dir="rtl"] .scroll-text,
+        body[dir="rtl"] .about-text h2,
+        body[dir="rtl"] .about-description,
+        body[dir="rtl"] .skill-category h4,
+        body[dir="rtl"] .skill-item,
+        body[dir="rtl"] .contact-info h2,
+        body[dir="rtl"] .contact-description,
+        body[dir="rtl"] .contact-link {
+            font-family: 'IBM Plex Sans Arabic', sans-serif !important;
         }
 
         /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: #fff;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
 
-        .cursor-trail {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
+            .cursor {
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: var(--text-primary);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.1s ease;
+                mix-blend-mode: difference;
+            }
+
+            .cursor-trail {
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                border: 1px solid var(--accent);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9998;
+                transition: all 0.3s ease;
+            }
         }
 
         /* Navigation */
@@ -193,7 +220,7 @@
             display: none;
             background: none;
             border: none;
-            color: #fff;
+            color: var(--text-primary);
             font-size: 18px;
             cursor: pointer;
             padding: 10px;
@@ -207,14 +234,37 @@
         }
 
         .nav-menu a {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-tertiary);
             text-decoration: none;
             font-weight: 400;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: color 0.4s ease;
+            transition: color 0.4s var(--transition-smooth), font-weight 0.3s ease;
             position: relative;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-variation-settings: 'wght' 400;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-primary);
+            font-variation-settings: 'wght' 700;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.4s var(--transition-smooth);
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .language-switcher {
@@ -225,64 +275,34 @@
 
         .lang-btn {
             background: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--accent);
+            color: var(--text-tertiary);
             padding: 6px 12px;
             border-radius: 4px;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s var(--transition-smooth);
             text-transform: uppercase;
             font-weight: 500;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: inherit;
         }
 
         .lang-btn[data-lang="ku"] {
-            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
             font-size: 14px;
             text-transform: none;
         }
 
-        /* Ensure English button uses Space Grotesk even when Kurdish is active */
-        .lang-btn[data-lang="en"] {
-            font-family: 'Space Grotesk', sans-serif !important;
-        }
-
-        /* When Kurdish is active, make sure Kurdish text in English button uses Noto Kufi */
-        body[dir="rtl"] .lang-btn[data-lang="en"] {
-            font-family: 'Noto Kufi Arabic', sans-serif !important;
-        }
-
         .lang-btn.active,
         .lang-btn:hover {
-            color: #fff;
+            color: var(--text-primary);
             border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-menu a:hover {
-            color: #fff;
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            width: 0;
-            height: 1px;
-            background: #fff;
-            transition: all 0.4s ease;
-            transform: translateX(-50%);
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
+            background: var(--accent);
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -294,21 +314,22 @@
             text-align: center;
             z-index: 2;
             max-width: 800px;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 6rem;
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 900;
             letter-spacing: -2px;
             margin-bottom: 30px;
             opacity: 0;
-            animation: fadeInUp 1.5s ease forwards 0.5s;
+            animation: fadeInUp 1.5s var(--transition-smooth) forwards 0.5s;
             background: linear-gradient(135deg, #ffffff 0%, #9ca3af 20%, #6b7280 40%, #4b5563 60%, #374151 80%, #000000 100%);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: fadeInUp 1.5s ease forwards 0.5s, gradientShift 8s ease infinite;
+            animation: fadeInUp 1.5s var(--transition-smooth) forwards 0.5s, gradientShift 8s ease infinite;
         }
 
         @keyframes gradientShift {
@@ -316,25 +337,44 @@
             50% { background-position: 100% 50%; }
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero-subtitle {
             font-size: 16px;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-tertiary);
             font-weight: 400;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 20px;
             opacity: 0;
-            animation: fadeInUp 1.5s ease forwards 1s;
+            animation: fadeInUp 1.5s var(--transition-smooth) forwards 1s;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-variation-settings: 'wght' 400;
+            transition: font-variation-settings 0.3s ease;
+            cursor: default;
+        }
+
+        .hero-subtitle:hover {
+            font-variation-settings: 'wght' 600;
         }
 
         .hero-description {
             font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-secondary);
             font-weight: 400;
             line-height: 1.6;
             margin-bottom: 60px;
             opacity: 0;
-            animation: fadeInUp 1.5s ease forwards 1.2s;
+            animation: fadeInUp 1.5s var(--transition-smooth) forwards 1.2s;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -346,7 +386,7 @@
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
-            animation: fadeInUp 1.5s ease forwards 1.5s;
+            animation: fadeInUp 1.5s var(--transition-smooth) forwards 1.5s;
         }
 
         .scroll-line {
@@ -365,7 +405,7 @@
             left: 0;
             width: 100%;
             height: 30px;
-            background: #fff;
+            background: var(--text-primary);
             animation: scrollAnimation 2s ease-in-out infinite;
         }
 
@@ -377,25 +417,17 @@
 
         .scroll-text {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-tertiary);
             letter-spacing: 1px;
             text-transform: uppercase;
             font-weight: 500;
         }
 
-        /* 3D Scene Container */
+        /* 3D Canvas */
         .canvas-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: 1;
-        }
-
-        #canvas3d {
-            width: 100%;
-            height: 100%;
         }
 
         /* About Section */
@@ -430,7 +462,7 @@
             border-radius: 12px;
             object-fit: cover;
             filter: grayscale(100%) contrast(1.2) brightness(1.3);
-            transition: all 0.6s ease;
+            transition: all 0.6s var(--transition-smooth);
             position: relative;
             z-index: 2;
         }
@@ -446,13 +478,13 @@
             background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
             backdrop-filter: blur(20px);
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--accent);
             z-index: 1;
             transform: rotate(3deg) scale(0.95);
         }
 
         .about-text h2 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             margin-bottom: 40px;
             letter-spacing: -1px;
@@ -461,7 +493,7 @@
         .about-description {
             font-size: 18px;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-secondary);
             font-weight: 400;
             margin-bottom: 40px;
         }
@@ -473,10 +505,6 @@
             margin-bottom: 40px;
         }
 
-        .skill-category {
-            margin-bottom: 20px;
-        }
-
         .skill-category h4 {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.8);
@@ -484,6 +512,14 @@
             letter-spacing: 1px;
             margin-bottom: 15px;
             font-weight: 600;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-variation-settings: 'wght' 600;
+            transition: font-variation-settings 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-category h4:hover {
+            font-variation-settings: 'wght' 800;
         }
 
         .skills-list {
@@ -494,15 +530,20 @@
 
         .skill-item {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-tertiary);
             font-weight: 400;
             position: relative;
             padding-left: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s var(--transition-smooth), transform 0.3s ease;
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-variation-settings: 'wght' 400;
+            cursor: default;
         }
 
         .skill-item:hover {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
+            transform: translateX(5px);
+            font-variation-settings: 'wght' 600;
         }
 
         .skill-item::before {
@@ -512,8 +553,28 @@
             top: 50%;
             width: 8px;
             height: 1px;
-            background: #fff;
+            background: var(--text-primary);
             transform: translateY(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .skill-item:hover::before {
+            width: 12px;
+        }
+
+        /* RTL Support for skill items */
+        body[dir="rtl"] .skill-item {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
+        body[dir="rtl"] .skill-item:hover {
+            transform: translateX(-5px);
+        }
+
+        body[dir="rtl"] .skill-item::before {
+            left: auto;
+            right: 0;
         }
 
         /* Contact Section */
@@ -535,7 +596,7 @@
         }
 
         .contact-info h2 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             margin-bottom: 40px;
             letter-spacing: -1px;
@@ -543,7 +604,7 @@
 
         .contact-description {
             font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 60px;
             font-weight: 300;
@@ -556,19 +617,22 @@
         }
 
         .contact-link {
-            color: #fff;
+            color: var(--text-primary);
             text-decoration: none;
             font-size: 16px;
             font-weight: 300;
-            transition: all 0.4s ease;
+            transition: all 0.4s var(--transition-smooth);
             position: relative;
             padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--accent);
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            font-variation-settings: 'wght' 300;
         }
 
         .contact-link:hover {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-tertiary);
             padding-left: 20px;
+            font-variation-settings: 'wght' 600;
         }
 
         .contact-visual {
@@ -584,40 +648,65 @@
             border-radius: 12px;
             animation: rotate3D 20s linear infinite;
             transform-style: preserve-3d;
-            transition: all 0.5s ease;
         }
 
         @keyframes rotate3D {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
         }
 
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Easter Egg */
+        .easter-egg-active {
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #dc143c) !important;
         }
 
-        /* Mobile Navigation */
-        .nav-menu.mobile-open {
+        .easter-egg-active nav {
+            background: rgba(255, 20, 147, 0.8) !important;
+        }
+
+        .kiss-overlay {
             position: fixed;
-            top: 100px;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            flex-direction: column;
-            padding: 30px;
-            gap: 30px;
-            text-align: center;
+            inset: 0;
+            background: radial-gradient(circle, rgba(255,20,147,0.1) 0%, transparent 70%);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
 
-        /* Responsive */
+        .kiss-overlay.active {
+            opacity: 1;
+        }
+
+        .kiss-emoji {
+            font-size: 12rem;
+            transform: scale(0);
+            filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9));
+        }
+
+        .kiss-emoji.animate {
+            animation: kissAnimation 2.5s var(--transition-bounce);
+        }
+
+        @keyframes kissAnimation {
+            0% { 
+                transform: scale(0) translateY(100px) rotate(-15deg);
+                filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.9)) blur(10px);
+            }
+            50% { 
+                transform: scale(1.1) translateY(-10px) rotate(2deg);
+                filter: drop-shadow(0 0 50px rgba(255, 105, 180, 1)) blur(0px);
+            }
+            100% { 
+                transform: scale(0) translateY(-50px) rotate(5deg);
+                filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.3)) blur(8px);
+            }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 1024px) {
             .about-container,
             .contact-container {
@@ -625,13 +714,12 @@
                 gap: 60px;
             }
             
-            .hero h1 {
-                font-size: 4rem;
-            }
-
             .skills-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+            }
+
+            .profile-section {
+                height: 400px;
             }
 
             .profile-image {
@@ -641,13 +729,8 @@
         }
 
         @media (max-width: 768px) {
-            /* Navigation */
             nav {
                 padding: 20px 30px;
-            }
-
-            .nav-container {
-                position: relative;
             }
             
             .nav-menu {
@@ -656,6 +739,16 @@
 
             .nav-menu.mobile-open {
                 display: flex;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 30px;
+                gap: 30px;
+                text-align: center;
             }
 
             .mobile-menu-toggle {
@@ -664,56 +757,14 @@
 
             .language-switcher {
                 margin-left: 0;
-                margin-top: 20px;
             }
             
-            /* Hero Section */
-            .hero {
-                padding: 0 20px;
-                text-align: center;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-                margin-bottom: 20px;
-            }
-
-            .hero-subtitle {
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-
-            .hero-description {
-                font-size: 16px;
-                margin-bottom: 40px;
-                padding: 0 10px;
-            }
-            
-            /* Sections */
             .about,
             .contact {
                 padding: 60px 20px;
             }
-            
-            .about-text h2,
-            .contact-info h2 {
-                font-size: 2.5rem;
-                margin-bottom: 30px;
-            }
-
-            .about-description,
-            .contact-description {
-                font-size: 16px;
-                margin-bottom: 30px;
-            }
-
-            /* About Section */
-            .about-container {
-                gap: 40px;
-            }
 
             .profile-section {
-                height: 400px;
                 order: -1;
             }
 
@@ -722,103 +773,44 @@
                 height: 280px;
             }
 
-            .skills-grid {
-                margin-bottom: 20px;
-            }
-
-            .skill-category h4 {
-                font-size: 12px;
-                margin-bottom: 12px;
-            }
-
-            .skill-item {
-                font-size: 13px;
-                padding-left: 15px;
-            }
-
-            .skill-item::before {
-                width: 6px;
-            }
-
-            /* Contact */
-            .contact-container {
-                gap: 40px;
-            }
-
             .contact-visual {
                 height: 250px;
                 order: -1;
             }
 
-            .contact-links {
-                gap: 20px;
-            }
-
-            .contact-link {
-                font-size: 15px;
-                padding: 12px 0;
-            }
-
-            /* 3D Canvas - Reduce performance on mobile */
             .canvas-container {
                 opacity: 0.3;
-            }
-
-            /* Cursor - Disable on mobile */
-            .cursor,
-            .cursor-trail {
-                display: none;
-            }
-
-            body {
-                cursor: auto;
             }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-text h2,
-            .contact-info h2 {
-                font-size: 2rem;
-            }
-
-            .hero-description {
-                font-size: 14px;
-            }
-
             .profile-image {
                 width: 180px;
                 height: 240px;
-            }
-
-            nav {
-                padding: 15px 20px;
             }
 
             .logo {
                 font-size: 18px;
             }
         }
-
-        /* Touch-friendly hover states */
-        @media (hover: none) and (pointer: coarse) {
-            .contact-link:hover {
-                padding-left: 0;
-            }
-        }
     </style>
 </head>
 <body>
+    <!-- Graphic Design Accents -->
+    <div class="design-accent design-accent-1"></div>
+    <div class="design-accent design-accent-2"></div>
+    <div class="design-accent design-accent-3"></div>
+    
     <div class="cursor"></div>
     <div class="cursor-trail"></div>
+    <div class="kiss-overlay" id="kissOverlay">
+        <div class="kiss-emoji">💋</div>
+    </div>
 
     <nav>
         <div class="nav-container">
             <div class="logo" data-en="Halbast" data-ku="هەڵبەست">Halbast</div>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" data-en="Home" data-ku="سەرەتا">Home</a></li>
                 <li><a href="#about" data-en="About" data-ku="دەربارە">About</a></li>
@@ -838,7 +830,9 @@
         <div class="hero-content">
             <h1 data-en="Halbast" data-ku="هەڵبەست">Halbast</h1>
             <p class="hero-subtitle" data-en="Graphic Designer" data-ku="گرافیک دیزاینەر">Graphic Designer</p>
-            <p class="hero-description" data-en="Creating compelling visual stories through thoughtful design. Specializing in graphic design, branding, and bringing creative concepts to life." data-ku="دروستکردنی چیرۆکی بینراوی سەرنجڕاکێش لە ڕێگەی دیزاینی ناوازەوە. شارەزا لە گرافیک دیزاین، براندینگ، و هێنانەدیی بیرۆکەی داهێنەرانە.">Creating compelling visual stories through thoughtful design. Specializing in graphic design, branding, and bringing creative concepts to life.</p>
+            <p class="hero-description" data-en="Creating compelling visual stories through thoughtful design. Specializing in graphic design, branding, and bringing creative concepts to life." data-ku="دروستکردنی چیرۆکی بینراوی سەرنجڕاکێش لە ڕێگەی دیزاینی ناوازەوە. شارەزا لە گرافیک دیزاین، براندینگ، و هێنانەدیی بیرۆکەی داهێنەرانە.">
+                Creating compelling visual stories through thoughtful design. Specializing in graphic design, branding, and bringing creative concepts to life.
+            </p>
         </div>
         <div class="scroll-indicator">
             <div class="scroll-line"></div>
@@ -893,9 +887,9 @@
                 </p>
                 <div class="contact-links">
                     <a href="mailto:halbastabdullah7@gmail.com" class="contact-link" data-en="halbastabdullah7@gmail.com" data-ku="ئیمەیڵ">halbastabdullah7@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/halbast/" class="contact-link" target="_blank" data-en="LinkedIn" data-ku="لینکدین">LinkedIn</a>
-                    <a href="https://instagram.com/halbaast_" class="contact-link" target="_blank" data-en="Instagram" data-ku="ئینستاگرام">Instagram</a>
-                    <a href="https://www.behance.net/halbastabdullah" class="contact-link" target="_blank" data-en="Behance" data-ku="بیهانس">Behance</a>
+                    <a href="https://www.linkedin.com/in/halbast/" class="contact-link" target="_blank" rel="noopener noreferrer" data-en="LinkedIn" data-ku="لینکدین">LinkedIn</a>
+                    <a href="https://instagram.com/halbaast_" class="contact-link" target="_blank" rel="noopener noreferrer" data-en="Instagram" data-ku="ئینستاگرام">Instagram</a>
+                    <a href="https://www.behance.net/halbastabdullah" class="contact-link" target="_blank" rel="noopener noreferrer" data-en="Behance" data-ku="بیهانس">Behance</a>
                 </div>
             </div>
             <div class="contact-visual">
@@ -906,59 +900,89 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Cursor
+        // Custom Cursor
         const cursor = document.querySelector('.cursor');
         const cursorTrail = document.querySelector('.cursor-trail');
-        let mouseX = 0, mouseY = 0;
-        let trailX = 0, trailY = 0;
+        
+        if (cursor && cursorTrail) {
+            let mouseX = 0, mouseY = 0;
+            let trailX = 0, trailY = 0;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-        });
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            });
 
-        function animateTrail() {
-            trailX += (mouseX - trailX) * 0.1;
-            trailY += (mouseY - trailY) * 0.1;
-            
-            cursorTrail.style.left = trailX - 10 + 'px';
-            cursorTrail.style.top = trailY - 10 + 'px';
-            
-            requestAnimationFrame(animateTrail);
+            function animateTrail() {
+                trailX += (mouseX - trailX) * 0.1;
+                trailY += (mouseY - trailY) * 0.1;
+                cursorTrail.style.left = trailX - 10 + 'px';
+                cursorTrail.style.top = trailY - 10 + 'px';
+                requestAnimationFrame(animateTrail);
+            }
+            animateTrail();
+
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(3)';
+                    cursorTrail.style.transform = 'scale(1.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorTrail.style.transform = 'scale(1)';
+                });
+            });
         }
-        animateTrail();
 
-        // Hover effects
-        document.querySelectorAll('a, .floating-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(3)';
-                cursorTrail.style.transform = 'scale(1.5)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorTrail.style.transform = 'scale(1)';
-            });
-        });
-
-        // Smooth scrolling
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('navMenu').classList.remove('mobile-open');
                 }
             });
         });
 
-        // 3D Scene with Three.js
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            document.getElementById('navMenu').classList.toggle('mobile-open');
+        }
+
+        // Language Switcher
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const elementsWithLang = document.querySelectorAll('[data-en]');
+        let currentLang = 'en';
+        
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                if (lang !== currentLang) {
+                    currentLang = lang;
+                    langButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    elementsWithLang.forEach(el => {
+                        if (el.dataset[lang]) {
+                            el.textContent = el.dataset[lang];
+                        }
+                    });
+                    
+                    if (lang === 'ku') {
+                        document.body.setAttribute('dir', 'rtl');
+                    } else {
+                        document.body.setAttribute('dir', 'ltr');
+                    }
+                }
+            });
+        });
+
+        // Three.js Scene
         let scene, camera, renderer, shapes = [];
         let easterEggActive = false;
         let heartShapes = [];
@@ -974,14 +998,11 @@
 
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setClearColor(0x000000, 0);
-
-            // Create initial shapes
             createOriginalShapes();
             camera.position.z = 10;
         }
 
         function createOriginalShapes() {
-            // Clear existing shapes
             shapes.forEach(shape => scene.remove(shape));
             shapes.length = 0;
 
@@ -1001,13 +1022,16 @@
                 });
                 
                 const mesh = new THREE.Mesh(geometry, material);
-                
-                mesh.position.x = (Math.random() - 0.5) * 20;
-                mesh.position.y = (Math.random() - 0.5) * 20;
-                mesh.position.z = (Math.random() - 0.5) * 20;
-                
-                mesh.rotation.x = Math.random() * Math.PI;
-                mesh.rotation.y = Math.random() * Math.PI;
+                mesh.position.set(
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 20
+                );
+                mesh.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    0
+                );
                 
                 scene.add(mesh);
                 shapes.push(mesh);
@@ -1016,16 +1040,15 @@
 
         function createHeartShape() {
             const heartShape = new THREE.Shape();
-            const x = 0, y = 0;
-            heartShape.moveTo(x + 5, y + 5);
-            heartShape.bezierCurveTo(x + 5, y + 5, x + 4, y, x, y);
-            heartShape.bezierCurveTo(x - 6, y, x - 6, y + 3.5, x - 6, y + 3.5);
-            heartShape.bezierCurveTo(x - 6, y + 5.5, x - 4, y + 7.5, x, y + 10);
-            heartShape.bezierCurveTo(x + 4, y + 7.5, x + 6, y + 5.5, x + 6, y + 3.5);
-            heartShape.bezierCurveTo(x + 6, y + 3.5, x + 6, y, x, y);
-            heartShape.bezierCurveTo(x + 4, y, x + 5, y + 5, x + 5, y + 5);
+            heartShape.moveTo(5, 5);
+            heartShape.bezierCurveTo(5, 5, 4, 0, 0, 0);
+            heartShape.bezierCurveTo(-6, 0, -6, 3.5, -6, 3.5);
+            heartShape.bezierCurveTo(-6, 5.5, -4, 7.5, 0, 10);
+            heartShape.bezierCurveTo(4, 7.5, 6, 5.5, 6, 3.5);
+            heartShape.bezierCurveTo(6, 3.5, 6, 0, 0, 0);
+            heartShape.bezierCurveTo(4, 0, 5, 5, 5, 5);
             
-            const geometry = new THREE.ExtrudeGeometry(heartShape, {
+            return new THREE.ExtrudeGeometry(heartShape, {
                 depth: 1,
                 bevelEnabled: true,
                 bevelSegments: 2,
@@ -1033,46 +1056,34 @@
                 bevelSize: 0.1,
                 bevelThickness: 0.1
             });
-            
-            return geometry;
-        }
-
-        function fadeOutAudio() {
-            if (window.easterEggAudio) {
-                const audio = window.easterEggAudio;
-                const fadeInterval = setInterval(() => {
-                    if (audio.volume > 0.05) {
-                        audio.volume -= 0.05;
-                    } else {
-                        audio.volume = 0;
-                        audio.pause();
-                        clearInterval(fadeInterval);
-                        window.easterEggAudio = null;
-                    }
-                }, 100);
-            }
         }
 
         function activateEasterEgg() {
             if (easterEggActive) return;
-            
             easterEggActive = true;
+            
             document.body.classList.add('easter-egg-active');
             
-            // Play your local careless-whisper.mp3 file
+            // Kiss animation
+            const kissOverlay = document.getElementById('kissOverlay');
+            const kissEmoji = kissOverlay.querySelector('.kiss-emoji');
+            kissOverlay.classList.add('active');
+            kissEmoji.classList.add('animate');
+            
+            setTimeout(() => {
+                kissOverlay.classList.remove('active');
+                kissEmoji.classList.remove('animate');
+            }, 2500);
+            
             const audio = new Audio('careless-whisper.mp3');
             audio.volume = 0.7;
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            
-            // Store audio reference for fade out
+            audio.play().catch(() => {});
             window.easterEggAudio = audio;
             
-            // Clear existing shapes
             shapes.forEach(shape => scene.remove(shape));
             shapes.length = 0;
             heartShapes.length = 0;
             
-            // Create heart shapes
             const heartGeometry = createHeartShape();
             
             for (let i = 0; i < 20; i++) {
@@ -1083,122 +1094,118 @@
                 });
                 
                 const heart = new THREE.Mesh(heartGeometry, material);
-                
-                heart.position.x = (Math.random() - 0.5) * 25;
-                heart.position.y = (Math.random() - 0.5) * 25;
-                heart.position.z = (Math.random() - 0.5) * 25;
-                
-                heart.rotation.x = Math.random() * Math.PI;
-                heart.rotation.y = Math.random() * Math.PI;
-                heart.rotation.z = Math.random() * Math.PI;
-                
+                heart.position.set(
+                    (Math.random() - 0.5) * 25,
+                    (Math.random() - 0.5) * 25,
+                    (Math.random() - 0.5) * 25
+                );
+                heart.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI
+                );
                 heart.scale.setScalar(0.3 + Math.random() * 0.4);
                 
                 scene.add(heart);
                 heartShapes.push(heart);
             }
             
-            // Start fade out at 8 seconds
             setTimeout(() => {
-                fadeOutAudio();
+                if (window.easterEggAudio) {
+                    const audio = window.easterEggAudio;
+                    const fadeInterval = setInterval(() => {
+                        if (audio.volume > 0.05) {
+                            audio.volume -= 0.05;
+                        } else {
+                            audio.pause();
+                            clearInterval(fadeInterval);
+                        }
+                    }, 100);
+                }
             }, 8000);
             
-            // Auto-deactivate after 10 seconds
             setTimeout(() => {
-                deactivateEasterEgg();
+                easterEggActive = false;
+                document.body.classList.remove('easter-egg-active');
+                if (window.easterEggAudio) {
+                    window.easterEggAudio.pause();
+                    window.easterEggAudio = null;
+                }
+                heartShapes.forEach(heart => scene.remove(heart));
+                heartShapes.length = 0;
+                createOriginalShapes();
             }, 10000);
         }
 
-        function deactivateEasterEgg() {
-            easterEggActive = false;
-            document.body.classList.remove('easter-egg-active');
-            
-            // Stop audio if still playing
-            if (window.easterEggAudio) {
-                window.easterEggAudio.pause();
-                window.easterEggAudio = null;
-            }
-            
-            // Clear hearts
-            heartShapes.forEach(heart => scene.remove(heart));
-            heartShapes.length = 0;
-            
-            // Restore original shapes
-            createOriginalShapes();
-        }
-
-        // Easter Egg functionality
+        // Easter Egg Trigger
         let easterEggSequence = '';
         const targetSequence = 'xalan';
 
-        // Listen for keystrokes
         document.addEventListener('keydown', (event) => {
-            let key = event.key.toLowerCase();
-            
-            easterEggSequence += key;
-            
-            // Keep only the last 5 characters (length of target sequence)
+            easterEggSequence += event.key.toLowerCase();
             if (easterEggSequence.length > targetSequence.length) {
                 easterEggSequence = easterEggSequence.slice(-targetSequence.length);
             }
-            
-            console.log('Current sequence:', easterEggSequence); // Debug line - remove in production
-            
-            // Check if sequence matches
             if (easterEggSequence === targetSequence) {
                 activateEasterEgg();
-                easterEggSequence = ''; // Reset sequence
+                easterEggSequence = '';
             }
         });
 
-        // Mouse interaction
-        let targetX = 0;
-        let targetY = 0;
+        // Grid toggle Easter egg - press 'G' key
+        document.addEventListener('keydown', (event) => {
+            if (event.key.toLowerCase() === 'g') {
+                document.body.classList.toggle('show-grid');
+            }
+        });
 
+        // Add subtle parallax to design accents
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const accents = document.querySelectorAll('.design-accent');
+            accents.forEach((accent, index) => {
+                const speed = 0.1 + (index * 0.05);
+                accent.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Mouse Interaction
+        let targetX = 0, targetY = 0;
         document.addEventListener('mousemove', (event) => {
             targetX = (event.clientX / window.innerWidth) * 2 - 1;
             targetY = -(event.clientY / window.innerHeight) * 2 + 1;
         });
 
-        // Animation loop
+        // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
 
-            // Smooth camera movement based on mouse
             camera.position.x += (targetX * 2 - camera.position.x) * 0.02;
             camera.position.y += (targetY * 2 - camera.position.y) * 0.02;
             camera.lookAt(0, 0, 0);
 
-            // Animate shapes (regular or hearts)
             if (easterEggActive && heartShapes.length > 0) {
-                // Animate hearts with smooth radiating effect
                 heartShapes.forEach((heart, index) => {
                     heart.rotation.x += 0.01 + index * 0.0005;
                     heart.rotation.y += 0.015 + index * 0.0005;
                     heart.rotation.z += 0.008 + index * 0.0003;
                     
-                    // Smooth pulsing effect - no random values
                     const pulseFactor = 1 + Math.sin(Date.now() * 0.003 + index) * 0.2;
-                    const baseScale = 0.4 + (index % 3) * 0.1; // Consistent base scale
+                    const baseScale = 0.4 + (index % 3) * 0.1;
                     heart.scale.setScalar(baseScale * pulseFactor);
                     
-                    // Floating motion with radiating pattern
                     const radiatingDistance = Math.sin(Date.now() * 0.002 + index) * 3;
                     heart.position.y += Math.sin(Date.now() * 0.001 + index) * 0.005;
                     
-                    // Create radiating effect from center
                     const angle = (index / heartShapes.length) * Math.PI * 2;
                     const radius = 8 + radiatingDistance;
                     heart.position.x = Math.cos(angle + Date.now() * 0.0005) * radius;
                     heart.position.z = Math.sin(angle + Date.now() * 0.0005) * radius;
                 });
             } else {
-                // Regular shape animation
                 shapes.forEach((shape, index) => {
                     shape.rotation.x += 0.002 + index * 0.0001;
                     shape.rotation.y += 0.003 + index * 0.0001;
-                    
-                    // Gentle floating motion
                     shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
                 });
             }
@@ -1206,13 +1213,13 @@
             renderer.render(scene, camera);
         }
 
-        // Initialize Three.js when page loads
+        // Initialize
         window.addEventListener('load', () => {
             initThreeJS();
             animate();
         });
 
-        // Handle resize
+        // Resize Handler
         window.addEventListener('resize', () => {
             if (camera && renderer) {
                 camera.aspect = window.innerWidth / window.innerHeight;
@@ -1221,61 +1228,8 @@
             }
         });
 
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('mobile-open');
-        }
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                const navMenu = document.getElementById('navMenu');
-                navMenu.classList.remove('mobile-open');
-            });
-        });
-
-        // Language switching functionality
-        const langButtons = document.querySelectorAll('.lang-btn');
-        const elementsWithLang = document.querySelectorAll('[data-en]');
-        
-        let currentLang = 'en';
-        
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.dataset.lang;
-                if (lang !== currentLang) {
-                    currentLang = lang;
-                    
-                    // Update active button
-                    langButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    // Update all text elements
-                    elementsWithLang.forEach(el => {
-                        if (el.dataset[lang]) {
-                            el.textContent = el.dataset[lang];
-                        }
-                    });
-                    
-                    // Update document direction for Kurdish
-                    if (lang === 'ku') {
-                        document.body.setAttribute('dir', 'rtl');
-                        document.body.style.textAlign = 'right';
-                    } else {
-                        document.body.setAttribute('dir', 'ltr');
-                        document.body.style.textAlign = 'left';
-                    }
-                }
-            });
-        });
-
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
+        // Intersection Observer for animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1285,23 +1239,11 @@
             });
         }, observerOptions);
 
-        // Observe elements for animation
         document.querySelectorAll('.about-text, .contact-info').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(50px)';
             el.style.transition = 'all 1s ease';
             observer.observe(el);
-        });
-
-        // Parallax effect for profile image
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const profileImage = document.querySelector('.profile-image');
-            
-            if (profileImage) {
-                const speed = 0.3;
-                profileImage.style.transform = `translateY(${scrolled * speed}px)`;
-            }
         });
     </script>
 </body>
